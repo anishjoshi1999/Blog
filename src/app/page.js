@@ -1,101 +1,80 @@
+"use client";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
 export default function Home() {
+ 
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.js
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <div className="min-h-screen bg-gray-50 flex flex-col">
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+
+      {/* Hero Section */}
+      <section className="bg-gradient-to-r from-blue-700 to-indigo-700 text-white py-20">
+        <div className="container mx-auto px-6 text-center">
+          <h2 className="text-5xl font-bold">Welcome to My Blog</h2>
+          <p className="mt-6 text-lg ">Sharing my thoughts on programming, technology, and life.</p>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+      </section>
+
+      {/* Featured Post */}
+      <section className="container mx-auto px-6 py-12">
+        <h2 className="text-3xl font-semibold text-gray-800 mb-8">Featured Post</h2>
+        <div className="bg-white shadow-lg rounded-lg overflow-hidden flex flex-col md:flex-row">
           <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
+            src="https://picsum.photos/600/400"
+            alt="Featured Post"
+            width={600}
+            height={400}
+            className="object-cover w-full md:w-1/2"
           />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+          <div className="p-8 flex flex-col justify-center">
+            <h3 className="text-2xl font-semibold text-gray-800">My Journey into Full Stack Development</h3>
+            {/* Tags */}
+            <div className="mt-4 flex space-x-3">
+              <span className="bg-blue-100 text-blue-600 text-sm px-3 py-1 rounded-full">Code</span>
+              <span className="bg-green-100 text-green-600 text-sm px-3 py-1 rounded-full">Technology</span>
+              <span className="bg-yellow-100 text-yellow-600 text-sm px-3 py-1 rounded-full">Lifestyle</span>
+            </div>
+            <p className="mt-6 text-gray-600">
+              A deep dive into how I transitioned from a beginner to a full-stack developer, covering my favorite tools and technologies.
+            </p>
+            <a href="#" className="mt-4 inline-block text-blue-600 hover:text-blue-500 underline font-medium">Read More</a>
+          </div>
+        </div>
+      </section>
+
+      {/* Recent Posts */}
+      <section className="container mx-auto px-6 py-12">
+        <h2 className="text-3xl font-semibold text-gray-800 mb-8">Recent Posts</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {/* Post Card */}
+          <div className="bg-white shadow-lg rounded-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300">
+            <Image
+              src="https://picsum.photos/500/300"
+              alt="Post Image"
+              width={500}
+              height={300}
+              className="w-full h-48 object-cover"
+            />
+            <div className="p-6">
+              <h3 className="text-xl font-semibold text-gray-800">Exploring the Power of Tailwind CSS</h3>
+              <div className="mt-3 flex space-x-2">
+                <span className="bg-blue-100 text-blue-600 text-sm px-2 py-1 rounded-full">Code</span>
+                <span className="bg-green-100 text-green-600 text-sm px-2 py-1 rounded-full">Technology</span>
+                <span className="bg-yellow-100 text-yellow-600 text-sm px-2 py-1 rounded-full">Lifestyle</span>
+              </div>
+              <p className="mt-4 text-gray-600">
+                Discover how Tailwind CSS can help you build modern, responsive UIs with ease.
+              </p>
+              <a href="#" className="mt-4 inline-block text-blue-600 hover:underline font-medium">Read More</a>
+            </div>
+          </div>
+
+          {/* Add more post cards similarly */}
+        </div>
+      </section>
+
+    
     </div>
   );
 }
