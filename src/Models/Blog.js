@@ -11,7 +11,6 @@ const blogSchema = new mongoose.Schema(
     },
     slug: {
       type: String,
-      required: true,
       unique: true,
       lowercase: true,
     },
@@ -35,6 +34,6 @@ blogSchema.pre('save', function (next) {
   next();
 });
 
-const Blog = mongoose.model('Blog', blogSchema);
+const Blog = mongoose.models.Blog || mongoose.model("Blog", blogSchema);
 
 module.exports = Blog;
