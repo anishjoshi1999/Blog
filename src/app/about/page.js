@@ -10,7 +10,7 @@ export default function About() {
           <h2 className="text-4xl font-extrabold text-gray-800 text-center mb-8">About Me</h2>
 
           <p className="text-lg text-gray-700 leading-relaxed mb-6">
-            Hi, I'm <span className="font-semibold text-gray-900">Anish Joshi</span>, a passionate Computer Engineer from Dhangadhi, Nepal. Currently, I'm working as an Associate Software Engineer at Cedar Gate Technologies, where I focus on web scraping, Node.js, and automation tools like Puppeteer. With over a year of experience, I’ve built efficient, scalable solutions that drive impact.
+            Hi, I&apos;m <span className="font-semibold text-gray-900">Anish Joshi</span>, a passionate Computer Engineer from Dhangadhi, Nepal. Currently, I&apos;m working as an Associate Software Engineer at Cedar Gate Technologies, where I focus on web scraping, Node.js, and automation tools like Puppeteer. With over a year of experience, I&apos;ve built efficient, scalable solutions that drive impact.
           </p>
 
           <p className="text-lg text-gray-700 leading-relaxed mb-6">
