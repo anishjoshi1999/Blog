@@ -1,3 +1,31 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.blog-article {
+    @apply max-w-5xl mx-auto my-8 p-6 bg-white shadow-lg rounded-lg;
+}
+
+.blog-title {
+    @apply text-5xl font-bold mb-4;
+}
+
+.blog-meta {
+    @apply text-gray-600 text-sm mb-4;
+}
+
+.blog-tags {
+    @apply flex space-x-2;
+}
+
+.blog-tag {
+    @apply bg-gray-200 px-2 py-1 rounded-full text-sm;
+}
+
+.blog-content {
+    @apply prose lg:prose-xl max-w-full; /* Use Tailwind's prose class for better typography */
+}
+
+.blog-content img {
+    @apply mx-auto block max-w-full h-auto; /* Center images and make them responsive */
+}

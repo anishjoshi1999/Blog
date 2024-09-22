@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const slugify = require('slugify'); // To generate the slug from the title
+const mongoose = require("mongoose");
+const slugify = require("slugify"); // To generate the slug from the title
 
 const blogSchema = new mongoose.Schema(
   {
@@ -21,15 +21,15 @@ const blogSchema = new mongoose.Schema(
     tags: {
       type: [String], // Array of tags
       required: true,
-    }
+    },
   },
   { timestamps: true }
 );
 
 // Pre-save middleware to auto-generate slug from title
-blogSchema.pre('save', function (next) {
-  if (this.isModified('title')) {
-    this.slug = slugify(this.title, { lower: true });
+blogSchema.pre("save", function (next) {
+  if (this.isModified("title")) {
+    this.slug = slugify(this.title, { lower: true, strict: true });
   }
   next();
 });

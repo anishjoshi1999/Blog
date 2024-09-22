@@ -1,6 +1,7 @@
-"use client"
+"use client";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { Editor } from "@tinymce/tinymce-react";
 
 const BlogManager = () => {
   const [blogs, setBlogs] = useState([]); // Stores all blogs
@@ -32,6 +33,11 @@ const BlogManager = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
+  };
+
+  // Handle TinyMCE content change
+  const handleEditorChange = (content) => {
+    setFormData({ ...formData, content });
   };
 
   // Handle form submission (either add or edit)
@@ -112,12 +118,22 @@ const BlogManager = () => {
         </div>
         <div className="mb-4">
           <label className="block text-sm font-medium">Content</label>
-          <textarea
-            name="content"
+          <Editor
+            apiKey='bt1659vg6xzrujr5xt6kjzr5xhi2z98t8q36gm2n6xwczfkv'
             value={formData.content}
-            onChange={handleChange}
-            className="mt-1 p-2 w-full border rounded h-32"
-          ></textarea>
+            init={{
+              height: 300,
+              plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
+              toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
+              tinycomments_mode: 'embedded',
+              tinycomments_author: 'Anish Joshi',
+              mergetags_list: [
+                { value: 'Programming', title: 'Programming' },
+                { value: 'Personal', title: 'Personal' },
+              ],
+            }}
+            onEditorChange={handleEditorChange}
+          />
         </div>
         <div className="mb-4">
           <label className="block text-sm font-medium">Tags (comma-separated)</label>

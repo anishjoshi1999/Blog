@@ -9,9 +9,12 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@tailwindcss/typography": "^0.5.15",
+    "@tinymce/tinymce-react": "^5.1.1",
     "axios": "^1.7.7",
     "mongoose": "^8.6.3",
     "next": "14.2.11",
+    "novel": "^0.5.0",
     "react": "^18",
     "react-dom": "^18",
     "slugify": "^1.6.6"

@@ -5,7 +5,22 @@ async function handler(req, res) {
   await dbConnect();
 
   const { slug } = req.query; // Extract slug from query if available
-if (req.method === "PUT") {
+  if (req.method === "GET") {
+    try {
+      // Fetch a single blog post by slug
+      const blog = await Blog.findOne({ slug });
+      if (!blog) {
+        return res
+          .status(404)
+          .json({ success: false, message: "Blog post not found" });
+      }
+      res.status(200).json({ success: true, blog });
+    } catch (err) {
+      console.error("Error:", err);
+      res.status(500).json({ success: false, message: "Server error" });
+    }
+  }
+else if (req.method === "PUT") {
     try {
       const { title, content, tags } = req.body;
 

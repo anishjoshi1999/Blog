@@ -1,36 +1,28 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
-
-const blogPosts = [
-  {
-    id: 1,
-    title: "Understanding React State",
-    slug: "understanding-react-state",
-    description: "A deep dive into managing state in React applications.",
-    tags: ["React", "JavaScript", "Frontend"],
-  },
-  {
-    id: 2,
-    title: "Node.js for Beginners",
-    slug: "nodejs-for-beginners",
-    description:
-      "An introductory guide to building server-side apps with Node.js.",
-    tags: ["Node.js", "JavaScript", "Backend"],
-  },
-  {
-    id: 3,
-    title: "Mastering Tailwind CSS",
-    slug: "mastering-tailwind-css",
-    description:
-      "Tips and tricks for designing beautiful UI with Tailwind CSS.",
-    tags: ["Tailwind CSS", "CSS", "Design"],
-  },
-  // Add more blog posts here
-];
+import axios from 'axios';
+import Loader from "@/components/Loader";// Import the Loader component
 
 function BlogPage() {
+  const [blogPosts, setBlogPosts] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
+  const [loading, setLoading] = useState(true); // Add loading state
+
+  useEffect(() => {
+    const fetchBlogs = async () => {
+      setLoading(true); // Start loading
+      try {
+        const res = await axios.get('/api/blogs');
+        setBlogPosts(res.data.blogs);
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setLoading(false); // Stop loading
+      }
+    };
+    fetchBlogs();
+  }, []);
 
   // Function to handle filtering of blog posts based on search query
   const filteredPosts = blogPosts.filter((post) => {
@@ -41,6 +33,8 @@ function BlogPage() {
       post.tags.some((tag) => tag.toLowerCase().includes(query))
     );
   });
+
+  if (loading) return <Loader />; // Show loader while fetching
 
   return (
     <div className="min-h-screen bg-gray-100 py-10">
