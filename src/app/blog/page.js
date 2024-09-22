@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import axios from 'axios';
-import Loader from "@/components/Loader";// Import the Loader component
+import Loader from "@/components/Loader"; // Import the Loader component
 
 function BlogPage() {
   const [blogPosts, setBlogPosts] = useState([]);
@@ -14,7 +14,11 @@ function BlogPage() {
       setLoading(true); // Start loading
       try {
         const res = await axios.get('/api/blogs');
-        setBlogPosts(res.data.blogs);
+        if (Array.isArray(res.data.blogs)) {
+          setBlogPosts(res.data.blogs);
+        } else {
+          console.error('Invalid data structure:', res.data);
+        }
       } catch (err) {
         console.error(err);
       } finally {
@@ -27,11 +31,12 @@ function BlogPage() {
   // Function to handle filtering of blog posts based on search query
   const filteredPosts = blogPosts.filter((post) => {
     const query = searchQuery.toLowerCase();
-    return (
-      post.title.toLowerCase().includes(query) ||
-      post.description.toLowerCase().includes(query) ||
-      post.tags.some((tag) => tag.toLowerCase().includes(query))
-    );
+
+    const titleMatches = post.title && post.title.toLowerCase().includes(query);
+    const descriptionMatches = post.description && post.description.toLowerCase().includes(query);
+    const tagMatches = Array.isArray(post.tags) && post.tags.length > 0 && post.tags.some((tag) => tag.toLowerCase().includes(query));
+
+    return titleMatches || descriptionMatches || tagMatches;
   });
 
   if (loading) return <Loader />; // Show loader while fetching
@@ -68,7 +73,7 @@ function BlogPage() {
 
                 <p className="text-gray-700 mb-4">{post.description}</p>
                 <div className="flex space-x-2">
-                  {post.tags.map((tag, index) => (
+                  {Array.isArray(post.tags) && post.tags.map((tag, index) => (
                     <span
                       key={index}
                       className="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-sm font-medium"
